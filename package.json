@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "Some description",
   "scripts": {
-    "preinstall": "npm install --global gulp",
     "postinstall": "gulp build",
     "start": "gulp serve",
     "test": "echo \"Error: no test specified\" && exit 1"

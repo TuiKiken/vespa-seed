@@ -1,8 +1,13 @@
+# Requirements
+
+- [NodeJS with NPM](https://nodejs.org/)
+
 # Install
 
-Just run console command:
+Just run console command(in the project directory):
 
 ``` shell
+npm install --global gulp
 npm install
 ```
 
@@ -35,6 +40,7 @@ npm start
 - [gulp](http://gulpjs.com/)
 - [webpack](http://webpack.github.io/)
 - [babel](http://babeljs.io/)
+- [postcss](https://github.com/postcss/postcss)
 - [browsersync](https://browsersync.io/)
 
 # TODO
