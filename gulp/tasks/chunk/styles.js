@@ -16,11 +16,9 @@ gulp.task('clean.styles', function () {
 
 gulp.task('build.styles', ['clean.styles'], function () {
 	var processors = [
-		require('postcss-import'),
-		require('postcss-nesting'),
-		require('postcss-cssnext'),
 		require('postcss-flexboxfixer'),
-		require('autoprefixer')
+		require('postcss-import'),
+		require('postcss-cssnext')
 	];
 
 	return gulp.src(path.join(SOURCE_PATH, 'styles/*.css'))

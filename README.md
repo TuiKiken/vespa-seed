@@ -30,7 +30,6 @@ npm start
 ## CSS
 
 - [cssnext](http://cssnext.io/features/)
-- [css nesting](https://github.com/jonathantneal/postcss-nesting)
 - [import](https://github.com/postcss/postcss-import)
 - [flexboxfixer](https://github.com/hallvors/postcss-flexboxfixer)
 - [autoprefixer](https://github.com/postcss/autoprefixer)
