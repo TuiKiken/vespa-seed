@@ -10,16 +10,16 @@ var SOURCE_PATH = config.path.src;
 var DESTINATION_PATH = config.path.dest;
 
 gulp.task('clean.html', function () {
-	return del(path.join(DESTINATION_PATH, '**/*.html'));
+  return del(path.join(DESTINATION_PATH, '**/*.html'));
 });
 
 gulp.task('build.html', ['clean.html'], function () {
-	return gulp.src(path.join(SOURCE_PATH, '**/*.html'))
-		.pipe(gulp.dest(DESTINATION_PATH));
+  return gulp.src(path.join(SOURCE_PATH, '**/*.html'))
+    .pipe(gulp.dest(DESTINATION_PATH));
 });
 
 gulp.task('watch.html', ['build.html'], function () {
-	gulp.watch(path.join(SOURCE_PATH, '**/*.html'), ['build.html'], function (event) {
-		gutil.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-	});
+  gulp.watch(path.join(SOURCE_PATH, '**/*.html'), ['build.html'], function (event) {
+    gutil.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+  });
 });

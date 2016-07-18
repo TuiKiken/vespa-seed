@@ -1,4 +1,4 @@
 export default {
-	init: 'application init',
-	start: 'application started'
+  init: 'application init',
+  start: 'application started'
 };

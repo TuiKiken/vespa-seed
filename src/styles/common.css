@@ -1,21 +1,21 @@
 html, body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-	padding: 0 20px;
+  padding: 0 20px;
 
-	@nest & h1 {
-		font-size: 2em;
+  @nest & h1 {
+    font-size: 2em;
 
-		@nest &:first-letter {
-			color: red;
-		}
-	}
+    @nest &:first-letter {
+      color: red;
+    }
+  }
 
-	@nest & p {
-		font-size: 1.2em;
-	}
+  @nest & p {
+    font-size: 1.2em;
+  }
 }
