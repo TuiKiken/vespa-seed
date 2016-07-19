@@ -1,46 +1,40 @@
-'use strict';
+import gulp from 'gulp';
+import gutil from 'gulp-util';
+import path from 'path';
+import del from 'del';
+import webpack from 'webpack';
+import config from '../../config';
+import webpackConfig from '../../../webpack.config.babel';
 
-var path = require('path');
-var del = require('del');
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var objectAssign = require('object-assign');
-var webpack = require('webpack');
-var config = require('../../config');
-var wpconf = require('../../../webpack.config');
-var compiler = webpack(objectAssign(
-  wpconf,
-  {devtool: 'source-map'}
-));
+const { dest: DESTINATION_PATH } = config.path;
 
-var DESTINATION_PATH = config.path.dest;
+let compiler = webpack({
+  ...webpackConfig,
+  devtool: 'source-map'
+});
 
-gulp.task('clean.scripts', function () {
+gulp.task('clean.scripts', () => {
   return del(path.join(DESTINATION_PATH, 'js'));
 });
 
-gulp.task('build.scripts', ['clean.scripts'], function (done) {
-  compiler.run(function (err, stats) {
+gulp.task('build.scripts', ['clean.scripts'], (done) => {
+  compiler.run((err, stats) => {
     if (err) {
       throw new gutil.PluginError('webpack', err);
     }
-    gutil.log('[webpack]', stats.toString({
-      colors: true
-    }));
+    gutil.log('[webpack]', stats.toString({ colors: true }));
     done();
   });
 });
 
-gulp.task('watch.scripts', ['clean.scripts'], function () {
+gulp.task('watch.scripts', ['clean.scripts'], () => {
   compiler.watch({
     aggregateTimeout: 10,
     poll: true
-  }, function (err, stats) {
+  }, (err, stats) => {
     if (err) {
       throw new gutil.PluginError('webpack', err);
     }
-    gutil.log('[webpack]', stats.toString({
-      colors: true
-    }));
+    gutil.log('[webpack]', stats.toString({ colors: true }));
   });
 });

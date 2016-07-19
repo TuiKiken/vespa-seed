@@ -1,21 +1,18 @@
-'use strict';
+import gulp from 'gulp';
+import gutil from 'gulp-util';
+import path from 'path';
+import del from 'del';
+import postcss from 'gulp-postcss';
+import config from '../../config';
 
-var path = require('path');
-var del = require('del');
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var postcss = require('gulp-postcss');
-var config = require('../../config');
+const { src: SOURCE_PATH, dest: DESTINATION_PATH } = config.path;
 
-var SOURCE_PATH = config.path.src;
-var DESTINATION_PATH = config.path.dest;
-
-gulp.task('clean.styles', function () {
+gulp.task('clean.styles', () => {
   return del(path.join(DESTINATION_PATH, 'styles'));
 });
 
-gulp.task('build.styles', ['clean.styles'], function () {
-  var processors = [
+gulp.task('build.styles', ['clean.styles'], () => {
+  let processors = [
     require('postcss-flexboxfixer'),
     require('postcss-import'),
     require('postcss-cssnext')
@@ -26,8 +23,8 @@ gulp.task('build.styles', ['clean.styles'], function () {
     .pipe(gulp.dest(path.join(DESTINATION_PATH, 'styles')));
 });
 
-gulp.task('watch.styles', ['build.styles'], function () {
-  gulp.watch(path.join(SOURCE_PATH, 'styles/**/*.css'), ['build.styles'], function (event) {
-    gutil.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+gulp.task('watch.styles', ['build.styles'], () => {
+  gulp.watch(path.join(SOURCE_PATH, 'styles/**/*.css'), ['build.styles'], (event) => {
+    gutil.log(`File ${event.path} was ${event.type}, running tasks...`);
   });
 });

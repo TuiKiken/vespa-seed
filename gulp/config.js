@@ -1,10 +1,6 @@
-'use strict';
-
-var config = {
+export default {
   path: {
     src: 'src',
     dest: 'dist'
   }
 };
-
-module.exports = config;

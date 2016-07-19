@@ -1,15 +1,14 @@
-'use strict';
+import gulp from 'gulp';
+import path from 'path';
+import { create as browserSyncCreator } from 'browser-sync';
+import config from '../config';
 
-var gulp = require('gulp');
-var path = require('path');
-var browserSync = require('browser-sync').create();
-var config = require('../config');
+const { dest: DESTINATION_PATH } = config.path;
 
-var DESTINATION_PATH = config.path.dest;
+let browserSync = browserSyncCreator();
 
-gulp.task('serve', ['watch'], function () {
+gulp.task('serve', ['watch'], () => {
   browserSync.init({
-    // logLevel: 'debug',
     server: {
       baseDir: DESTINATION_PATH
     },

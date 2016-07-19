@@ -1,7 +1,7 @@
-var path = require('path');
-var webpack = require('webpack');
+import path from 'path';
+import webpack from 'webpack';
 
-module.exports = {
+export default {
   context: path.join(__dirname, 'src/js'),
   entry: {
     application: './application.js'
