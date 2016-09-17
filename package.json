@@ -5,6 +5,7 @@
   "scripts": {
     "postinstall": "gulp build",
     "start": "gulp serve",
+    "lint": "gulp lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Valentin Shevko",
@@ -16,6 +17,7 @@
     "babel-preset-stage-0": "~6.5.0",
     "browser-sync": "~2.15.0",
     "del": "~2.2.0",
+    "eslint": "~3.5.0",
     "gulp": "~3.9.0",
     "gulp-postcss": "~6.2.0",
     "postcss-cssnext": "~2.8.0",
