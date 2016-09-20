@@ -4,7 +4,7 @@
 
 # Install
 
-Just run console command(in the project directory):
+Just run this console commands in the project directory:
 
 ``` shell
 npm install --global gulp
@@ -13,10 +13,16 @@ npm install
 
 # Development
 
-Use console command:
+Start development using console command:
 
 ```shell
 npm start
+```
+
+Check your code for compliance with style guides:
+
+```shell
+npm run lint
 ```
 
 # Features
@@ -41,6 +47,8 @@ npm start
 - [babel](http://babeljs.io/)
 - [postcss](https://github.com/postcss/postcss)
 - [browsersync](https://browsersync.io/)
+- [eslint](http://eslint.org/)
+- [stylelint](http://stylelint.io/)
 
 # TODO
 
