@@ -2,6 +2,7 @@ import gulp from 'gulp';
 import gutil from 'gulp-util';
 import path from 'path';
 import del from 'del';
+import stylelint from 'stylelint';
 import postcss from 'gulp-postcss';
 import config from '../../config';
 
@@ -26,5 +27,20 @@ gulp.task('build.styles', ['clean.styles'], () => {
 gulp.task('watch.styles', ['build.styles'], () => {
   gulp.watch(path.join(SOURCE_PATH, 'styles/**/*.css'), ['build.styles'], (event) => {
     gutil.log(`File ${event.path} was ${event.type}, running tasks...`);
+  });
+});
+
+gulp.task('lint.styles', () => {
+  stylelint.lint({
+    files: [
+      path.join(SOURCE_PATH, 'styles/**/*.css')
+    ],
+    formatter: 'verbose'
+  })
+  .then((results) => {
+    gutil.log('[stylelint]', results.output);
+  })
+  .catch((results) => {
+    gutil.log('[stylelint]', gutil.colors.red(results));
   });
 });
