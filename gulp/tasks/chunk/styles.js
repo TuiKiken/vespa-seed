@@ -31,7 +31,7 @@ gulp.task('watch.styles', ['build.styles'], () => {
 });
 
 gulp.task('lint.styles', () => {
-  stylelint.lint({
+  return stylelint.lint({
     files: [
       path.join(SOURCE_PATH, 'styles/**/*.css')
     ],
