@@ -1,16 +1,17 @@
-import messages from './messages';
-
-class Application {
-  constructor() {
-    let { init } = messages;
-    console.log(`Some important message: ${init}`);
+export default class Application {
+  constructor(messages) {
+    this.messages = messages;
   }
 
   start() {
-    const { start: START_MESSAGE } = messages;
-    console.log(`Wow, look at this message: ${START_MESSAGE}`);
+    this.print(this.messages.start);
+  }
+
+  doSomething() {
+    this.print(this.messages.perform);
+  }
+
+  print(message) {
+    console.log(message);
   }
 }
-
-let app = new Application();
-app.start();

@@ -1,4 +1,4 @@
 export default {
-  init: 'application init',
-  start: 'application started'
+  start: 'application started',
+  perform: 'application does some work'
 };

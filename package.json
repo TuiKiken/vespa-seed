@@ -1,31 +1,102 @@
 {
-  "name": "some-application-name",
+  "name": "vespa-application",
   "version": "0.0.1",
   "description": "Some description",
-  "scripts": {
-    "postinstall": "gulp build",
-    "start": "gulp serve",
-    "lint": "gulp lint",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Valentin Shevko",
   "license": "MIT",
+  "private": true,
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "config": {
+    "src": "src",
+    "dest": "dist",
+    "conf": "configs"
+  },
+  "scripts": {
+    "start": "npm run build && (npm run sync & npm run watch)",
+    "test": "npm run build && npm run test:scripts",
+    "build": "npm run clean && (npm run build:scripts & npm run build:styles & npm run build:html & wait)",
+    "lint": "npm run lint:scripts && npm run lint:styles",
+    "watch": "npm run watch:scripts & npm run watch:styles",
+    "clean": "rm -rf ${npm_package_config_dest} && mkdir ${npm_package_config_dest}",
+    "sync": "browser-sync start --config ${npm_package_config_conf}/browser-sync.js",
+    "build:html": "cp ${npm_package_config_src}/index.html ${npm_package_config_dest}/index.html",
+    "build:scripts": "webpack --config ${npm_package_config_conf}/webpack.babel.js",
+    "build:styles": "postcss --config ${npm_package_config_conf}/postcss.js",
+    "watch:scripts": "npm run build:scripts -- --watch",
+    "watch:styles": "npm run build:styles -- --watch",
+    "lint:scripts": "eslint ${npm_package_config_src}/js/**/*.js",
+    "lint:styles": "stylelint \"${npm_package_config_src}/styles/**/*.css\"",
+    "test:scripts": "ava"
+  },
   "devDependencies": {
-    "babel-core": "~6.14.0",
-    "babel-loader": "~6.2.0",
-    "babel-preset-es2015": "~6.14.0",
-    "babel-preset-stage-0": "~6.5.0",
-    "browser-sync": "~2.15.0",
-    "del": "~2.2.0",
-    "eslint": "~3.5.0",
-    "gulp": "~3.9.0",
-    "gulp-postcss": "~6.2.0",
-    "postcss-cssnext": "~2.8.0",
-    "postcss-flexboxfixer": "~0.0.0",
-    "postcss-import": "~8.1.0",
-    "require-dir": "~0.3.0",
-    "stylelint": "^7.2.0",
-    "stylelint-config-standard": "^13.0.0",
-    "webpack": "~1.13.0"
+    "ava": "0.17.x",
+    "babel-core": "6.18.x",
+    "babel-loader": "6.2.x",
+    "babel-preset-latest": "6.16.x",
+    "browser-sync": "2.18.x",
+    "eslint": "3.11.x",
+    "postcss-cli": "2.6.x",
+    "postcss-cssnext": "2.9.x",
+    "postcss-import": "9.0.x",
+    "sinon": "1.17.x",
+    "stylelint": "7.6.x",
+    "stylelint-config-standard": "15.0.x",
+    "webpack": "2.1.0-beta.27"
+  },
+  "babel": {
+    "presets": [
+      [
+        "latest",
+        {
+          "modules": false
+        }
+      ]
+    ]
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  },
+  "eslintConfig": {
+    "root": true,
+    "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "impliedStrict": true,
+        "experimentalObjectRestSpread": true
+      }
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+      "no-console": "warn",
+      "no-debugger": "warn",
+      "camelcase": "warn",
+      "indent": [
+        "error",
+        2
+      ],
+      "linebreak-style": [
+        "error",
+        "unix"
+      ],
+      "quotes": [
+        "warn",
+        "single"
+      ]
+    }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard"
   }
 }
